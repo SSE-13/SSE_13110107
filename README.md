@@ -39,7 +39,7 @@
    * 在此献上我的座右铭来结束这篇一本正经的自我介绍。
    
   
-![猴赛雷](https://raw.githubusercontent.com/oznightray/pic2/master/Screen.Shot.2016-02-29.at.8.05.45.PM.png)
+                     ![猴赛雷](https://raw.githubusercontent.com/oznightray/pic2/master/Screen.Shot.2016-02-29.at.8.05.45.PM.png)
 
 *************
 
