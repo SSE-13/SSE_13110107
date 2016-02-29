@@ -36,6 +36,8 @@
 
 3. 总结
    * 我的邮箱是 [378484452@qq.com](https://mail.qq.com/cgi-bin/loginpage)，欢迎大家发投诉邮件。
+   * 在此献上我的座右铭来结束这篇毫无美感的自我介绍。
+   ![猴赛雷](http://ww4.sinaimg.cn/large/b10a8131gw1f0xkhhbwwlj20hf0ka40r.jpg)
 
 *************
 
