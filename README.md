@@ -21,15 +21,15 @@
 
    * 未来希望能掌握日语，走上人生巅峰，成为程序猿，建设社会主义。为了证明自己的实力，在此输出一行“Hello World”以表诚意：
 
-   ```c
-   #include<iostream.h>
-   int main(){
-      bool handsome = true;
-      if(handsome)
-         cout<<”HelloWorld”<<endl;
-      return 0;
-   }
-```
+     ```c
+     #include<iostream.h>
+     int main(){
+        bool handsome = true;
+        if(handsome)
+           cout<<”HelloWorld”<<endl;
+        return 0;
+     }
+     ```
 
       但由于并非出身计院，也并非隔壁软工，因此明白自己的能力和专业性还远远不够，对成为猿的道路充满担忧。希望能通过老师的课了解专业的软件制作流程。
 
