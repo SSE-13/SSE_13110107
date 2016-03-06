@@ -121,12 +121,12 @@ var text = new TextField();
 text.x = 10;
 
 var bitmap = new Bitmap();
-bitmap.source = 'wander-icon.jpg';
+bitmap.source = '1.png';
 
 //渲染队列
 var renderQueue = [rect, rect2, text,bitmap];
 //资源加载列表
-var imageList = ['wander-icon.jpg'];
+var imageList = ['1.png'];
 
 //先加载资源，加载成功之后执行渲染队列
 loadResource(imageList, function() {
