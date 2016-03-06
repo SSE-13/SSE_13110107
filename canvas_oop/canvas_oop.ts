@@ -121,13 +121,31 @@ rect2.rotation = Math.PI / 10;
 rect2.color = '#FFFF00'
 
 var rect3 = new Rect();
-rect3.width = 100;
+rect3.width = 200;
 rect3.height =20;
 
-//rect3.rotation = Math.PI / 8;
-rect3.x = 385;
-rect3.y = 130;
+rect3.rotation = Math.PI / 35;
+rect3.x = 390;
+rect3.y = 100;
 rect3.color = '#FFFF00'
+
+var rect4 = new Rect();
+rect4.width = 250;
+rect4.height =20;
+
+//rect4.rotation =  Math.PI / 2;
+rect4.x = 160;
+rect4.y = 120;
+rect4.color = '#FF0000'
+
+var rect5 = new Rect();
+rect5.width = 60;
+rect5.height =20;
+
+//rect4.rotation =  Math.PI / 2;
+rect5.x = 0;
+rect5.y = 150;
+rect5.color = '#FF0000'
 
 var text = new TextField();
 text.x = 5;
@@ -154,7 +172,7 @@ bitmap4.x = 215;
 bitmap4.y = 150;
 
 //渲染队列
-var renderQueue = [rect, rect2,rect3,text,bitmap1,bitmap2,bitmap3,bitmap4];
+var renderQueue = [rect, rect2, rect3,rect4,rect5,text,bitmap1,bitmap2,bitmap3,bitmap4];
 //资源加载列表
 var imageList = ['1.png','2.png','3.png','4.png'];
 
