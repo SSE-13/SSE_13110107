@@ -2,6 +2,7 @@
  * 重力加速度
  */
 var GRAVITY = 9.8;
+var FA = -0.1;
 var BOUNDS_BOTTOM = 400;
 var BOUNDS_LEFT = 0;
 var BOUNDS_RIGHT = 400;
@@ -41,23 +42,41 @@ var Body = (function () {
         this.y = 0;
         this.width = 0;
         this.height = 0;
+        this.currentY = 0;
+        this.lastY = 0;
+        this.fa = FA;
+        this.stop = false;
         this.displayObject = displayObject;
     }
     Body.prototype.onTicker = function (duringTime) {
+        this.lastY = this.currentY;
         this.vy += duringTime * GRAVITY;
-        //if(this.vx>0){
+        // if(this.lastY>BOUNDS_BOTTOM-this.height && this.currentY>BOUNDS_BOTTOM-this.height){
+        //     this.vy = 0;
+        // }
+        if ((this.lastY >= BOUNDS_BOTTOM - this.height) && (this.currentY >= BOUNDS_BOTTOM - this.height)) {
+            this.vx += this.fa * duringTime;
+        }
+        if ((this.fa <= 0 && this.vx <= 0) || (this.fa >= 0 && this.vx >= 0)) {
+            this.vx = 0;
+        }
+        if (this.stop) {
+        }
         this.x += duringTime * this.vx;
-        //}else{
-        //    this.x -= duringTime * this.vx;
-        //}
         this.y += duringTime * this.vy;
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM) {
             this.vy = -BOUNCE * this.vy;
+            this.y = BOUNDS_BOTTOM - this.height;
         }
+        this.currentY = this.y;
+        //f = ma = umg
+        //vt = vx + at
+        //x = v0t + 1/2at^2
         //TODO： 左右越界反弹
         if (this.x + this.width > BOUNDS_RIGHT || this.x < 0) {
             this.vx = -BOUNCE * this.vx;
+            this.fa = -this.fa;
         }
         //if (this.x < 0) {
         //    this.vx = -BOUNCE * this.vx;
