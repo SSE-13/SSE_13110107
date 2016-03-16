@@ -51,25 +51,14 @@ var Body = (function () {
     Body.prototype.onTicker = function (duringTime) {
         this.lastY = this.currentY;
         this.vy += duringTime * GRAVITY;
-        //console.log(this.y);
-        if ((this.x + this.width) > BOUNDS_RIGHT && this.vx > 0) {
-            this.vx = -BOUNCE * this.vx;
-            this.fa = -this.fa;
-            console.log(this.x);
-            console.log(this.vx);
-        }
-        else if (this.x < 0 && this.vx < 0) {
-            this.vx = -BOUNCE * this.vx;
-            this.fa = -this.fa;
-        }
         this.x += duringTime * this.vx;
         this.y += duringTime * this.vy;
-        //反弹
+        //上下反弹
         if (this.y + this.height > BOUNDS_BOTTOM) {
             this.vy = -BOUNCE * this.vy;
             this.y = BOUNDS_BOTTOM - this.height;
         }
-        if (this.y < 0) {
+        if (this.y < 0 && this.vy < 0) {
             this.vy = -BOUNCE * this.vy;
         }
         this.currentY = this.y;
@@ -77,18 +66,20 @@ var Body = (function () {
         //vt = vx + at
         //x = v0t + 1/2at^2
         //TODO： 左右越界反弹
-        if (((this.fa <= 0 && this.vx <= 0) || (this.fa >= 0 && this.vx >= 0)) && (this.y >= BOUNDS_BOTTOM - this.height)) {
-            this.vx = 0;
+        if ((this.x + this.width > BOUNDS_RIGHT && this.vx > 0) || (this.x < 0 && this.vx < 0)) {
+            this.vx = -BOUNCE * this.vx;
+            this.fa = -this.fa;
         }
-        if ((this.lastY >= BOUNDS_BOTTOM - this.height) && (this.currentY >= BOUNDS_BOTTOM - this.height)) {
-            this.vx += this.fa * duringTime;
+        //当连续两次取值低于边界且vx!=0时视为有水平位移，故摩擦力生效
+        if ((this.lastY >= BOUNDS_BOTTOM - this.height) && (this.currentY >= BOUNDS_BOTTOM - this.height) && this.vx != 0) {
+            if (((this.fa <= 0 && this.vx <= 0) || (this.fa >= 0 && this.vx >= 0))) {
+                this.vx = 0;
+                this.fa = 0;
+            }
+            else {
+                this.vx += this.fa * duringTime;
+            }
         }
-        //if (this.x + this.width > BOUNDS_RIGHT||this.x<0) {
-        //    this.vx = -BOUNCE * this.vx;
-        //    this.fa = -this.fa;
-        //}
-        //console.log(this.x+this.width);
-        //console.log(this.vx);
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;
         displayObject.x = this.x;
@@ -106,8 +97,8 @@ rect.color = '#FF0000';
 var body = new Body(rect);
 body.width = rect.width;
 body.height = rect.height;
-body.vx = 50; //需要保证 vx 在 0-50的范围内行为正常
-body.vy = 50; //需要保证 vy 在 0-50的范围内行为正常
+body.vx = 10; //需要保证 vx 在 0-50的范围内行为正常
+body.vy = 0; //需要保证 vy 在 0-50的范围内行为正常
 var renderCore = new RenderCore();
 var ticker = new Ticker();
 renderCore.start([rect]);
