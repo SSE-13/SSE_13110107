@@ -71,17 +71,17 @@ class Body {
         this.lastY = this.currentY;
 
         this.vy += duringTime * GRAVITY;
+       
         
-        
-       // if(this.lastY>BOUNDS_BOTTOM-this.height && this.currentY>BOUNDS_BOTTOM-this.height){
-       //     this.vy = 0;
-       // }
-       if((this.lastY >= BOUNDS_BOTTOM - this.height) && (this.currentY >= BOUNDS_BOTTOM - this.height)){
-            this.vx += this.fa * duringTime; 
-        }
-        
-        if((this.fa<=0&&this.vx<=0)||(this.fa>=0&&this.vx>=0)){
-             this.vx = 0;
+        //console.log(this.y);
+        if ((this.x + this.width) > BOUNDS_RIGHT&&this.vx>0){//||(this.x<0)) {
+            this.vx = - BOUNCE * this.vx;
+            this.fa = - this.fa;
+            console.log(this.x);
+            console.log(this.vx);
+        }else if(this.x<0&&this.vx<0){
+            this.vx = - BOUNCE * this.vx;
+            this.fa = - this.fa;
         }
         
         this.x += duringTime * this.vx;
@@ -89,9 +89,13 @@ class Body {
         this.y += duringTime * this.vy;
         
         //反弹
-        if (this.y + this.height > BOUNDS_BOTTOM) {
+        if (this.y + this.height > BOUNDS_BOTTOM ) {
             this.vy = -BOUNCE * this.vy;
             this.y  = BOUNDS_BOTTOM - this.height;
+        }
+        
+        if (this.y < 0) {
+            this.vy = -BOUNCE * this.vy;
         }
         
         this.currentY = this.y;
@@ -101,21 +105,21 @@ class Body {
         
         //TODO： 左右越界反弹
         
-        if (this.x + this.width > BOUNDS_RIGHT||this.x<0) {
-            this.vx = -BOUNCE * this.vx;
-            this.fa = -this.fa;
+        
+        if(((this.fa<=0&&this.vx<=0)||(this.fa>=0&&this.vx>=0))&&(this.y>= BOUNDS_BOTTOM - this.height)){
+             this.vx = 0;
         }
         
-        
-        
-        
-        
-        //if (this.x < 0) {
+        if((this.lastY >= BOUNDS_BOTTOM - this.height) && (this.currentY >= BOUNDS_BOTTOM - this.height)){
+            this.vx += this.fa * duringTime; 
+        }
+        //if (this.x + this.width > BOUNDS_RIGHT||this.x<0) {
         //    this.vx = -BOUNCE * this.vx;
+        //    this.fa = -this.fa;
         //}
-
-
-
+        
+        //console.log(this.x+this.width);
+        //console.log(this.vx);
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;
         displayObject.x = this.x;
@@ -136,8 +140,8 @@ rect.color = '#FF0000';
 var body = new Body(rect);
 body.width = rect.width;
 body.height = rect.height;
-body.vx = 5;//需要保证 vx 在 0-50的范围内行为正常
-body.vy = 0;//需要保证 vy 在 0-50的范围内行为正常
+body.vx = 50;//需要保证 vx 在 0-50的范围内行为正常
+body.vy = 50;//需要保证 vy 在 0-50的范围内行为正常
 
 
 var renderCore = new RenderCore();
