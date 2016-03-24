@@ -20,9 +20,11 @@ var Ticker = (function () {
         var duringTime = currentTime - this.lastTime;
         this.lastTime = currentTime;
         this.bodyQueue.map(function (body) {
-            body.onTicker(duringTime / 100);
+            body.onTicker(duringTime / 20);
+            //console.log('y'+duringTime/25);
             body.updateDisplayObject();
         });
+        //console.log('');
     };
     return Ticker;
 }());
@@ -46,3 +48,5 @@ var Body = (function () {
     };
     return Body;
 }());
+var renderCore = new RenderCore();
+var ticker = new Ticker();

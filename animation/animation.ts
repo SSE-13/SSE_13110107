@@ -67,7 +67,7 @@ class Body {
     }
 
     public onTicker(duringTime) {
-        
+        //console.log(duringTime);
         this.lastY = this.currentY;
 
         this.vy += duringTime * GRAVITY;
@@ -110,7 +110,7 @@ class Body {
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;
         displayObject.x = this.x;
-        displayObject.y = this.y;
+       displayObject.y = this.y;
 
     }
 }

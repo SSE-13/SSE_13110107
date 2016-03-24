@@ -49,6 +49,7 @@ var Body = (function () {
         this.displayObject = displayObject;
     }
     Body.prototype.onTicker = function (duringTime) {
+        //console.log(duringTime);
         this.lastY = this.currentY;
         this.vy += duringTime * GRAVITY;
         this.x += duringTime * this.vx;

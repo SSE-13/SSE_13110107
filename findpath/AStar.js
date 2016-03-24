@@ -195,6 +195,7 @@ var astar;
                 openList.sort(function (a, b) { return a.f - b.f; });
                 node = openList.shift();
             }
+            this._endNode.inPath = true; //自行添加
             this.buildPath();
             return true;
         };

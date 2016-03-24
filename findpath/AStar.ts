@@ -20,7 +20,7 @@ module astar {
         }
 
         toString() {
-            if (this.inPath) {
+            if (this.inPath) {//inpath为寻路结果，并非设定障碍
                 return "田"
             }
             else{
@@ -189,7 +189,7 @@ module astar {
 
 
 
-        public search(): Boolean {
+        public search(): Boolean {//遍历四周的相邻点
             var grid = this._grid;
             var openList = this._open;
             var closedList = this._closed;
@@ -238,6 +238,7 @@ module astar {
                 openList.sort((a, b) => a.f - b.f);
                 node = openList.shift() as Node;
             }
+            this._endNode.inPath = true;//自行添加
             this.buildPath();
             return true;
         }
