@@ -3,31 +3,41 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var container = new render.DisplayObjectContainer();
-// container.x = 100;
-var bitmap = new render.Bitmap();
-bitmap.source = "wander-icon.jpg";
-var bitmap2 = new render.Bitmap();
-bitmap2.source = "wander-icon.jpg";
-bitmap2.x = -50;
-bitmap2.y = -50;
-// container.addChild(bitmap)
-container.addChild(bitmap2);
+var humanContainer = new render.DisplayObjectContainer();
+var head = new render.Bitmap();
+head.source = "wander-icon.jpg";
+head.y -= 100;
+humanContainer.addChild(head);
 var renderCore = new render.RenderCore();
-renderCore.start(container, ["wander-icon.jpg"]);
+renderCore.start(humanContainer, ["wander-icon.jpg"]);
 var HumanBody = (function (_super) {
     __extends(HumanBody, _super);
     function HumanBody() {
         _super.apply(this, arguments);
     }
     HumanBody.prototype.onTicker = function (duringTime) {
-        // this.x += 1;
-        this.x = this.y = 100;
+        this.x = 400;
+        this.y = 300;
         this.rotation += 1;
     };
     return HumanBody;
 }(Body));
 var ticker = new Ticker();
-var body = new HumanBody(container);
+var rect = new render.Rect();
+rect.x -= 50;
+rect.y -= 50;
+var trunk = new render.Bitmap();
+trunk.source = "wander-icon.jpg";
+trunk.y -= 100;
+var down = new render.Bitmap();
+down.source = "wander-icon.jpg";
+down.y += 200;
+var right = new render.Bitmap();
+down.source = "wander-icon.jpg";
+down.y += 200;
+humanContainer.addChild(rect);
+//humanContainer.addChild(trunk);
+//humanContainer.addChild(down);
+var body = new HumanBody(humanContainer);
 ticker.start([body]);
 //# sourceMappingURL=game.js.map

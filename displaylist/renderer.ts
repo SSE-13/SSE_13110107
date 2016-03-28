@@ -43,7 +43,13 @@ module render {
             else {
                 //TODO:
                 // GLOBAL_MATRIX = PARENT_GLOBAL_MATRIX * LOCAL_MATRIX
-                this.globalMatrix = localMatrix;
+                this.globalMatrix.a = localMatrix.a * parent.globalMatrix.a + localMatrix.b * parent.globalMatrix.c;
+                this.globalMatrix.b = localMatrix.a * parent.globalMatrix.b + localMatrix.b * parent.globalMatrix.d;
+                this.globalMatrix.c = localMatrix.c * parent.globalMatrix.a + localMatrix.d * parent.globalMatrix.c;
+                this.globalMatrix.d = localMatrix.c * parent.globalMatrix.b + localMatrix.d * parent.globalMatrix.d;
+                this.globalMatrix.tx = localMatrix.tx * parent.globalMatrix.a + localMatrix.ty * parent.globalMatrix.c + parent.globalMatrix.tx;
+                this.globalMatrix.ty = localMatrix.tx * parent.globalMatrix.b + localMatrix.ty * parent.globalMatrix.d + parent.globalMatrix.ty;
+                //this.globalMatrix = localMatrix;
             }
 
 
@@ -59,7 +65,7 @@ module render {
         }
 
         render(context: CanvasRenderingContext2D) {
-
+            
         }
     }
 
@@ -106,7 +112,7 @@ module render {
 
     }
 
-    class Rect extends DisplayObject {
+    export class Rect extends DisplayObject {
 
         width = 100
 
@@ -196,3 +202,4 @@ module render {
 
     }
 }
+
