@@ -37,17 +37,6 @@ function createMapEditor() {
 
 }
 
-function writeFile() {
-    var map_path = __dirname + "/map.json"
-    var content = fs.readFileSync(map_path, "utf-8");
-    
-    var obj = JSON.stringify(mapData);
-    fs.writeFileSync(map_path,obj);
-    
-   // var obj = JSON.parse(content);
-   // var mapData = obj.map;
-   // return mapData;
-}
 
 
 function onTileClick(tile: editor.Tile) {
@@ -57,7 +46,6 @@ function onTileClick(tile: editor.Tile) {
         mapData[tile.ownedRow][tile.ownedCol] = 1;
     }
     tile.setWalkable(mapData[tile.ownedRow][tile.ownedCol]);
-    
     console.log(tile);
 }
 
@@ -69,6 +57,26 @@ var renderCore = new render.RenderCore();
 var eventCore = new events.EventCore();
 eventCore.init();
 
+
+var editor = createMapEditor();
+//renderCore.start(editor);
+
+
+function saveFile() {
+    var map_path = __dirname + "/map.json"
+    var content = fs.readFileSync(map_path, "utf-8");
+    var obj = JSON.parse(content);
+    
+    obj.map = mapData;
+    
+     obj = JSON.stringify(obj);
+    console.log(mapData);
+    fs.writeFileSync(map_path,obj,"utf-8");
+    
+   // var obj = JSON.parse(content);
+   // var mapData = obj.map;
+   // return mapData;
+}
 var buttonStart = new render.Rect();
 buttonStart.x = 0;
 buttonStart.y = 300;
@@ -77,12 +85,11 @@ buttonStart.height = 100;
 buttonStart.color = '#FF0000';
 eventCore.register(buttonStart,events.displayObjectRectHitTest,buttonOnClick);
 function buttonOnClick() {
-    writeFile();
+    saveFile();
     console.log('ok');
     
 }
 
-var editor = createMapEditor();
 var globalmap = new render.DisplayObjectContainer();
 renderCore.start(globalmap);
 globalmap.addChild(editor);
@@ -91,3 +98,15 @@ globalmap.addChild(buttonStart);
 
 
 
+
+
+/*function onTileClick(tile: editor.Tile) {
+    if(mapData[tile.ownedRow][tile.ownedCol] == 1){
+        mapData[tile.ownedRow][tile.ownedCol] = 0;
+    }else{
+        mapData[tile.ownedRow][tile.ownedCol] = 1;
+    }
+    tile.setWalkable(mapData[tile.ownedRow][tile.ownedCol]);
+    
+    console.log(tile);
+}*/
